@@ -14,15 +14,14 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build Docker image
-        run: docker build -t latest-test .
+        run: docker build -t azure-test-image .
 
       - name: Log in to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
 
-      - name: Push Docker image
-        run: docker push latest-test
+      - name: Tag Docker image as latest
+        run: docker tag azure-test-image:latest
 
-      - name: Deploy to Production
-        run: |
-          docker run -d -p 3000:3000 latest-test
+      - name: Push Docker image
+        run: docker push azure-test-image
 
