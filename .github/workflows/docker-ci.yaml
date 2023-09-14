@@ -1,0 +1,28 @@
+name: Docker CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build Docker image
+        run: docker build -t latest-test .
+
+      - name: Log in to Docker Hub
+        run: docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+      - name: Push Docker image
+        run: docker push latest-test
+
+      - name: Deploy to Production
+        run: |
+          docker run -d -p 3000:3000 latest-test
+
