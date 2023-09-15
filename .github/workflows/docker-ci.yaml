@@ -25,4 +25,4 @@ jobs:
         run: docker tag azure-test-image:latest latest:latest
 
       - name: Push Docker image
-        run: docker push azure-test-image/azure:latest
+        run: docker push azure-test-image azure:latest
