@@ -6,7 +6,7 @@ function App() {
       <header className="App-header">
 
         <p>
-          Hello world
+          This is a docker app... or is it???
         </p>
 
       </header>
