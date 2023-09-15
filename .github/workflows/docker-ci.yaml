@@ -20,36 +20,11 @@ jobs:
 
       - name: Log in to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
-name: Docker CI/CD
-
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Build Docker image
-        run: |
-          cd my-app
-          docker build -t azure-test-image .
-
-      - name: Log in to Docker Hub
-        run: docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
 
       - name: Tag Docker image as latest and git commit sha
-        run: |
-          docker tag azure-test-image ${{ secrets.DOCKER_HUB_USERNAME }}/azure:latest
-          docker tag azure-test-image ${{ secrets.DOCKER_HUB_USERNAME }}/azure:${{ github.sha }}
-
-      - name: Push Docker image
-        run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/azure:latest
+       run: |
+         docker tag azure-test-image "${{ secrets.DOCKER_HUB_USERNAME }}/azure:latest"
+         docker tag azure-test-image "${{ secrets.DOCKER_HUB_USERNAME }}/azure:${{ github.sha }}"
 
 
       - name: Push Docker image
