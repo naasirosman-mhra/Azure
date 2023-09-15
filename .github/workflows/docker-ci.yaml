@@ -28,4 +28,7 @@ jobs:
 
 
       - name: Push Docker image
-        run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/azure:latest
+        run: |
+          docker push "${{ secrets.DOCKER_HUB_USERNAME }}/azure:latest"
+          docker push "${{ secrets.DOCKER_HUB_USERNAME }}/azure:${{ github.sha }}"
+
