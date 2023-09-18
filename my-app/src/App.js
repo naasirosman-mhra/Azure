@@ -6,7 +6,7 @@ function App() {
       <header className="App-header">
 
         <p>
-          and this is latest
+          This is the second latest commit
         </p>
 
       </header>
