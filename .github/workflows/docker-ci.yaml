@@ -31,7 +31,7 @@ jobs:
         run: |
           docker push "${{ secrets.DOCKER_HUB_USERNAME }}/azure:latest"
           docker push "${{ secrets.DOCKER_HUB_USERNAME }}/azure:${{ github.sha }}"
-          
+
       - name: Log in to Azure
         uses: azure/login@v1
         with:
@@ -40,12 +40,5 @@ jobs:
 
       - name: Docker Image Update on Azure
         run: |
-          az webapp config container set --docker-custom-image-name ${{ secrets.DOCKER_HUB_USERNAME }}/azure:${{ github.sha }}
-                               --docker-registry-server-password ${{ secrets.DOCKER_HUB_PASSWORD }}
-                               --docker-registry-server-url https://docke-web-app3.azurewebsites.net/
-                               --docker-registry-server-user naasirosman
-                               --name docke-web-app3
-                               --resource-group docker-task-rg
-                               --subscription 277d5213-e976-4194-b4a0-26ba64fe6b04
-
+          az webapp config container set --resource-group docker-task-rg --name docke-web-app3 --docker-custom-image-name ${{ secrets.DOCKER_HUB_USERNAME }}/azure:${{ github.sha }}
 
