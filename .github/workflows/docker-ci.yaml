@@ -39,7 +39,7 @@ jobs:
 
       - name: Azure Login
         run: |
-          az login -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }}
+          az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }}
 
 
       - name: Build Bicep Template
@@ -49,7 +49,7 @@ jobs:
 
       - name: Deploy Bicep Template
         run: |
-          rgName="docker-app-rg" # Replace with your desired resource group name
+          rgName="docker-app-rg"
           az deployment group create \
             --resource-group $rgName \
             --template-file ./main.bicep \
