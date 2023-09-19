@@ -32,27 +32,18 @@ jobs:
           docker push "${{ secrets.DOCKER_HUB_USERNAME }}/azure:latest"
           docker push "${{ secrets.DOCKER_HUB_USERNAME }}/azure:${{ github.sha }}"
 
-      - name: Install Azure CLI
-        run: |
-          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-
-
       - name: Azure Login
         run: |
           az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }}
 
-
-      - name: Build Bicep Template
+      - name: Docker Image Update on Azure
         run: |
-          az bicep build -f path/to/your/bicep/template.bicep
-        working-directory: ${{ github.workspace }}
+          az webapp config container set --docker-custom-image-name ${{ secrets.DOCKER_HUB_USERNAME }}/azure:${{ github.sha }}
+                               --docker-registry-server-password ${{ secrets.DOCKER_HUB_PASSWORD }}
+                               --docker-registry-server-url https://docke-web-app3.azurewebsites.net/
+                               --docker-registry-server-user naasirosman
+                               --name docke-web-app3
+                               --resource-group docker-task-rg
+                               --subscription 277d5213-e976-4194-b4a0-26ba64fe6b04
 
-      - name: Deploy Bicep Template
-        run: |
-          rgName="docker-app-rg"
-          az deployment group create \
-            --resource-group $rgName \
-            --template-file ./main.bicep \
-            --parameters @param.json
-        working-directory: ${{ github.workspace }}
 
