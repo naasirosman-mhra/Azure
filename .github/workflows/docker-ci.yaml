@@ -32,3 +32,5 @@ jobs:
           docker push "${{ secrets.DOCKER_HUB_USERNAME }}/azure:latest"
           docker push "${{ secrets.DOCKER_HUB_USERNAME }}/azure:${{ github.sha }}"
 
+      
+
