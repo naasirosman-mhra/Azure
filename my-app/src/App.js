@@ -6,7 +6,7 @@ function App() {
       <header className="App-header">
 
         <p>
-          hello
+          This is my Docker image hosted on Azure Web App
         </p>
 
       </header>
