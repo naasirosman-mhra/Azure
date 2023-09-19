@@ -33,7 +33,7 @@ jobs:
           docker push "${{ secrets.DOCKER_HUB_USERNAME }}/azure:${{ github.sha }}"
 
       - name: Install Azure CLI
-         run: |
+        run: |
           curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
 
