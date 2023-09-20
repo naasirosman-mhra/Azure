@@ -6,7 +6,7 @@ function App() {
       <header className="App-header">
 
         <p>
-          This is my Docker image hosted on Azure Web App
+          This is my Docker image hosted on Azure Web App and automated in the workflow
         </p>
 
       </header>
