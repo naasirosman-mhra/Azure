@@ -43,3 +43,8 @@ jobs:
         run: |
           az webapp config container set --resource-group docker-task-rg --name docke-web-app3 --docker-custom-image-name ${{ secrets.DOCKER_HUB_USERNAME }}/azure:${{ github.sha }}
 
+  security-scan:
+   needs: [build-and-deploy]
+   uses: ./.github/workflows/security-scan.yml
+   secrets: 
+    DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}

@@ -1,10 +1,11 @@
 name: Security Scan
 
 on:
-  push:
-    branches:
-      - main
-      - feature/**
+  workflow_call:
+    secrets: 
+      DOCKER_HUB_USERNAME: 
+          required: true
+    
 
 jobs:
   security-scan:
