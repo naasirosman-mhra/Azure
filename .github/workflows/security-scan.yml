@@ -15,10 +15,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Grype Scan
-        uses: anchore/scan-action@v3
-        with:
-          image: '${{ secrets.DOCKER_HUB_USERNAME }}/azure:${{ github.sha }}'
 
       - name: Trivy Security Scan
         uses: aquasecurity/trivy-action@master
@@ -29,4 +25,11 @@ jobs:
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
+
+      - name: Grype Scan
+        uses: anchore/scan-action@v3
+        with:
+          image: '${{ secrets.DOCKER_HUB_USERNAME }}/azure:${{ github.sha }}'
+
+
         
