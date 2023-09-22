@@ -28,4 +28,4 @@ jobs:
       - name: Scan image
         uses: anchore/scan-action@v3
         with:
-        image: '${{ secrets.DOCKER_HUB_USERNAME }}/azure:${{ github.sha }}'
+          image: '${{ secrets.DOCKER_HUB_USERNAME }}/azure:${{ github.sha }}'
